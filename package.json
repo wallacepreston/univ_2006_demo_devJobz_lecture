@@ -1,0 +1,23 @@
+{
+  "name": "univ_2006_demo_devJobz_lecture",
+  "version": "1.0.0",
+  "description": "Demo of a simple Express server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wallacepreston/univ_2006_demo_devJobz_lecture.git"
+  },
+  "keywords": [],
+  "author": "Preston Wallace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wallacepreston/univ_2006_project_11_day_01/issues"
+  },
+  "homepage": "https://github.com/wallacepreston/univ_2006_project_11_day_01#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
