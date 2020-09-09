@@ -12,6 +12,7 @@ const express = require('express');
 // instantiates a new app (web server)
 const app = express();
 
+// body-parser is necessary for getting the `body` sent over with a request (i.e. the `body` from the fetch request)
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
