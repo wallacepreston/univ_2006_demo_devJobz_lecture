@@ -50,7 +50,7 @@ app.get('/apples', (req, res, next) => {
 })
 
 // setting up our app to run indefinitely, listening on our given port. The callback is an optional (but great) second parameter.
-const port = 5000
+const port = 6000
 app.listen(port, function() {
   console.log(`app is started and listening on port ${port}`)
 })
