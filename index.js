@@ -3,7 +3,7 @@ VANILLA JS, NO EXPRESS/SERVER
 */
 // we can do anything we normally would in raw JS
 console.log('app has started');
-const
+
 /* 
 EXPRESS SERVER - Our main use case in this cohort
 */
@@ -11,10 +11,13 @@ EXPRESS SERVER - Our main use case in this cohort
 const express = require('express');
 // instantiates a new app (web server)
 const app = express();
-
+const chalk = require('chalk');
+const morgan = require('morgan');
+app.use(morgan('dev'));
 // body-parser is necessary for getting the `body` sent over with a request (i.e. the `body` from the fetch request)
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // if someone makes a GET request to our app at this URI: 'bananas' run this code... which ultimately sends back an html string.
 app.get('/bananas', (req, res, next) => {
@@ -48,10 +51,13 @@ app.get('/apples', (req, res, next) => {
     {fish: 'What do you get if you cross an apple with a 🦪 shellfish? A crab apple.'},
     {computer: 'What type of a computer does a horse 🐴 like to eat? A Macintosh.'},
   ])
-})
+});
+
+// when someone requests the root route, serve up the `public` directory
+app.use(express.static('public'));
 
 // setting up our app to run indefinitely, listening on our given port. The callback is an optional (but great) second parameter.
-const port = 6000
+const port = 8000;
 app.listen(port, function() {
-  console.log(`app is started and listening on port ${port}`)
+  console.log(`app is started and listening on ${chalk.yellow('localhost:')} ${chalk.green(port)}`);
 })
