@@ -12,6 +12,9 @@ const express = require('express');
 // instantiates a new app (web server)
 const app = express();
 const chalk = require('chalk');
+/* 
+NEW: morgan is logging middleware.  Runs for every request, since it's at the top. Gives us information about the request and response.
+*/
 const morgan = require('morgan');
 app.use(morgan('dev'));
 // body-parser is necessary for getting the `body` sent over with a request (i.e. the `body` from the fetch request)
@@ -53,11 +56,16 @@ app.get('/apples', (req, res, next) => {
   ])
 });
 
-// when someone requests the root route, serve up the `public` directory
+/* 
+NEW! STATIC DIRECTORY
+*/
+// We can set up a static directory.  This basically says "treat `./public` as if it were the root of a directory. Give them anything they ask for here, as long as it exists in this directory!" 
+// most commonly used for: (1) HTML file, (2) CSS file, (3) images, (4) frontend javascript file like `app.js` that will be loaded and run from the html file.
 app.use(express.static('public'));
 
 // setting up our app to run indefinitely, listening on our given port. The callback is an optional (but great) second parameter.
 const port = 8000;
+// chalk colors our terminal with fun colors!!
 app.listen(port, function() {
   console.log(`app is started and listening on ${chalk.yellow('localhost:')} ${chalk.green(port)}`);
-})
+});
