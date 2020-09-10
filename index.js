@@ -3,7 +3,7 @@ VANILLA JS, NO EXPRESS/SERVER
 */
 // we can do anything we normally would in raw JS
 console.log('app has started');
-
+const
 /* 
 EXPRESS SERVER - Our main use case in this cohort
 */
