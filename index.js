@@ -1,36 +1,22 @@
-/* 
-VANILLA JS, NO EXPRESS/SERVER
-*/
-// we can do anything we normally would in raw JS
-console.log('app has started');
-
-/* 
-EXPRESS SERVER - Our main use case in this cohort
-*/
-// we'll need express. pulls in library from node_modules that I installed
+// required modules
 const express = require('express');
-// instantiates a new app (web server)
 const app = express();
-const chalk = require('chalk');
-/* 
-NEW: morgan is logging middleware.  Runs for every request, since it's at the top. Gives us information about the request and response.
-*/
 const morgan = require('morgan');
-app.use(morgan('dev'));
-// body-parser is necessary for getting the `body` sent over with a request (i.e. the `body` from the fetch request)
 const bodyParser = require('body-parser');
+const chalk = require('chalk');
+
+// middleware
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // if someone makes a GET request to our app at this URI: 'bananas' run this code... which ultimately sends back an html string.
 app.get('/bananas', (req, res, next) => {
-  console.log('something');
   res.send('<h1>you have reached bananas</h1>')
 })
 
 // we can define our desired verb (the method: post, get, patch, delete)
 app.post('/bananas', (req, res, next) => {
-  console.log(req.body);
   res.send({youSentUs: req.body});
 })
 
@@ -56,16 +42,11 @@ app.get('/apples', (req, res, next) => {
   ])
 });
 
-/* 
-NEW! STATIC DIRECTORY
-*/
-// We can set up a static directory.  This basically says "treat `./public` as if it were the root of a directory. Give them anything they ask for here, as long as it exists in this directory!" 
-// most commonly used for: (1) HTML file, (2) CSS file, (3) images, (4) frontend javascript file like `app.js` that will be loaded and run from the html file.
+// static directory
 app.use(express.static('public'));
 
-// setting up our app to run indefinitely, listening on our given port. The callback is an optional (but great) second parameter.
 const port = 8000;
-// chalk colors our terminal with fun colors!!
+// setting up our app to run indefinitely, listening on our given port.
 app.listen(port, function() {
-  console.log(`app is started and listening on ${chalk.yellow('localhost:')} ${chalk.green(port)}`);
+  console.log(`app is started and listening at on port  ${chalk.yellow('http://localhost:') + chalk.green(port)}`)
 });
