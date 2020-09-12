@@ -1,14 +1,30 @@
 // required modules
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
-
+const axios = require('axios');
 // middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+const KEY = process.env.KEY;
+console.log('KEY: ', KEY);
+
+app.get('/harvard', async (req, res, next) => {
+  try {
+    const {data} = await axios.get(`https://api.harvardartmuseums.org/object?apikey=${KEY}`);
+    console.log('data: ', data);
+    res.send(data)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({error})
+  }
+})
 
 // if someone makes a GET request to our app at this URI: 'bananas' run this code... which ultimately sends back an html string.
 app.get('/bananas', (req, res, next) => {
